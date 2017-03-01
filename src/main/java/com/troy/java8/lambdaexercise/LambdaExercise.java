@@ -19,22 +19,13 @@ public class LambdaExercise {
 				);
 		
 		//用lastName分類
-		Collections.sort(people, new Comparator<Person>() {
-			@Override
-			public int compare(Person o1, Person o2) {
-				return o1.getLastName().compareTo(o2.getLastName());
-			}
-		});
+		Collections.sort(people, (o1,o2) -> o1.getLastName().compareTo(o2.getLastName()));
 		
 		//寫個function因出所有人的資訊
 		printAll(people);
 		
 		//寫個方法印出lastName開頭是C的人
-		printConditionally(people, new Condition() {
-			public boolean test(Person p) {
-				return p.getLastName().startsWith("C");
-			}
-		});
+		printConditionally(people, p -> p.getLastName().startsWith("C"));
 		
 	}
 	
