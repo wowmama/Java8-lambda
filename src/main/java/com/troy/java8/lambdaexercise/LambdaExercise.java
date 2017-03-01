@@ -17,13 +17,33 @@ public class LambdaExercise {
 				);
 		
 		//用lastName分類
-		
+		Collections.sort(people, new Comparator<Person>() {
+			@Override
+			public int compare(Person o1, Person o2) {
+				return o1.getLastName().compareTo(o2.getLastName());
+			}
+		});
 		
 		//寫個function因出所有人的資訊
-		
+		printAll(people);
 		
 		//寫個方法印出lastName開頭是C的人
+		printLastNameBeginningWithC(people);
+		
+	}
+	
+	private static void printLastNameBeginningWithC(List<Person> people) {
+		for(Person p : people){
+			if(p.getLastName().startsWith("C")){
+				System.out.println(p);
+			}
+		}
+	}
 
+	private static void printAll(List<Person> people) {
+		for(Person p : people){
+			System.out.println(p);
+		}
 	}
 
 }
