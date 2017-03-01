@@ -7,6 +7,8 @@ import java.util.List;
 
 public class LambdaExercise {
 
+	
+
 	public static void main(String[] args) {
 		List<Person> people = Arrays.asList(
 					new Person("Charles", "Dickens", 60),
@@ -28,11 +30,15 @@ public class LambdaExercise {
 		printAll(people);
 		
 		//寫個方法印出lastName開頭是C的人
-		printLastNameBeginningWithC(people);
+		printConditionally(people, new Condition() {
+			public boolean test(Person p) {
+				return p.getLastName().startsWith("C");
+			}
+		});
 		
 	}
 	
-	private static void printLastNameBeginningWithC(List<Person> people) {
+	private static void printConditionally(List<Person> people, Condition condition) {
 		for(Person p : people){
 			if(p.getLastName().startsWith("C")){
 				System.out.println(p);
@@ -46,4 +52,8 @@ public class LambdaExercise {
 		}
 	}
 
+}
+
+interface Condition {
+	boolean test(Person p);
 }
