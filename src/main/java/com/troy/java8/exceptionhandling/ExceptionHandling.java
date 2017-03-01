@@ -12,20 +12,24 @@ public class ExceptionHandling {
 //		process(someNumbers, key, (v, k) -> System.out.println(v-k));
 //		process(someNumbers, key, (v, k) -> System.out.println(v*k));
 		
-		process(someNumbers, key, (v, k) -> {
-			try{
-				System.out.println(v/k);
-			}catch(ArithmeticException e){
-				//Do something...
-				System.out.println("ArithmeticException happened!");
-			}
-		});
+		process(someNumbers, key, wrapper((v, k) -> System.out.println(v/k)));
 	}
 
 	private static void process(int[] someNumbers, int key, BiConsumer<Integer, Integer> consumer) {
 		for(int i : someNumbers){
 			consumer.accept(i, key);
 		}
+	}
+	
+	private static BiConsumer<Integer, Integer> wrapper(BiConsumer<Integer, Integer> consumer){
+		return (v, k) -> {
+			try{
+				consumer.accept(v, k);
+			}catch(ArithmeticException e){
+				//Do something...
+				System.out.println("ArithmeticException happened!");
+			}
+		};
 	}
 
 }
