@@ -11,17 +11,20 @@ public class ExceptionHandling {
 //		process(someNumbers, key, (v, k) -> System.out.println(v+k));
 //		process(someNumbers, key, (v, k) -> System.out.println(v-k));
 //		process(someNumbers, key, (v, k) -> System.out.println(v*k));
-		process(someNumbers, key, (v, k) -> System.out.println(v/k));
-	}
-
-	private static void process(int[] someNumbers, int key, BiConsumer<Integer, Integer> consumer) {
-		for(int i : someNumbers){
+		
+		process(someNumbers, key, (v, k) -> {
 			try{
-				consumer.accept(i, key);
+				System.out.println(v/k);
 			}catch(ArithmeticException e){
 				//Do something...
 				System.out.println("ArithmeticException happened!");
 			}
+		});
+	}
+
+	private static void process(int[] someNumbers, int key, BiConsumer<Integer, Integer> consumer) {
+		for(int i : someNumbers){
+			consumer.accept(i, key);
 		}
 	}
 
